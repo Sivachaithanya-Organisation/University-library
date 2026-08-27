@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}University Library{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="library-backdrop"></div>
+
+<header class="topbar">
+  <a class="brand" href="{{ url_for('index') }}">
+    <span class="brand-icon">&#128218;</span>
+    <span>Ashcombe University Library</span>
+  </a>
+  <form class="search-form" action="{{ url_for('search') }}" method="get">
+    <input type="text" name="q" placeholder="Search title, author, category..." value="{{ request.args.get('q','') }}">
+    <button type="submit">Search</button>
+  </form>
+  <nav class="top-nav">
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('add_book') }}">Add Book</a>
+  </nav>
+</header>
+
+<div class="page-shell">
+  <aside class="sidebar">
+    <h3>Categories</h3>
+    <ul class="category-list">
+      {% for c in categories %}
+        <li><a href="{{ url_for('category_view', category=c) }}" class="{% if category is defined and category == c %}active{% endif %}">{{ c }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <main class="content">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for m in messages %}<p>{{ m }}</p>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<footer class="footer">
+  <p>Ashcombe University Library &middot; Catalog System &middot; Built with Flask</p>
+</footer>
+</body>
+</html>

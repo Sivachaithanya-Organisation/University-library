@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ book['title'] }} — University Library{% endblock %}
+{% block content %}
+<div class="book-detail">
+  <div class="book-cover"></div>
+  <div class="book-info">
+    <h1>{{ book['title'] }}</h1>
+    <p class="book-author-lg">by {{ book['author'] }}</p>
+    <p class="book-tag">{{ book['category'] }}</p>
+    <table class="meta-table">
+      <tr><th>Year</th><td>{{ book['year'] or 'n.d.' }}</td></tr>
+      <tr><th>Call Number</th><td>{{ book['call_number'] or '—' }}</td></tr>
+      <tr><th>Copies Available</th><td>{{ book['copies'] }}</td></tr>
+    </table>
+    <p class="book-desc">{{ book['description'] }}</p>
+    <a class="back-link" href="{{ url_for('category_view', category=book['category']) }}">&larr; Back to {{ book['category'] }}</a>
+  </div>
+</div>
+{% endblock %}
