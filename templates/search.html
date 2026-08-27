@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Search — University Library{% endblock %}
+{% block content %}
+<h1 class="section-title">Search Results</h1>
+{% if query %}
+<p class="section-sub">{{ books|length }} result(s) for "{{ query }}"</p>
+{% else %}
+<p class="section-sub">Enter a search term above to find books by title, author, or category.</p>
+{% endif %}
+
+{% if books %}
+<div class="book-list">
+  {% for b in books %}
+    <a class="book-row" href="{{ url_for('book_detail', book_id=b['id']) }}">
+      <div class="book-spine-sm"></div>
+      <div class="book-row-body">
+        <div class="book-title">{{ b['title'] }}</div>
+        <div class="book-author">{{ b['author'] }} &middot; {{ b['category'] }}</div>
+      </div>
+      <div class="book-row-meta">
+        <span>{{ b['copies'] }} copies</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

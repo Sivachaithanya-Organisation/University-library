@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ category }} — University Library{% endblock %}
+{% block content %}
+<h1 class="section-title">{{ category }}</h1>
+<p class="section-sub">{{ books|length }} title(s) in this category.</p>
+
+{% if books %}
+<div class="book-list">
+  {% for b in books %}
+    <a class="book-row" href="{{ url_for('book_detail', book_id=b['id']) }}">
+      <div class="book-spine-sm"></div>
+      <div class="book-row-body">
+        <div class="book-title">{{ b['title'] }}</div>
+        <div class="book-author">{{ b['author'] }} &middot; {{ b['year'] or 'n.d.' }}</div>
+      </div>
+      <div class="book-row-meta">
+        <span>Call No. {{ b['call_number'] or '—' }}</span>
+        <span>{{ b['copies'] }} copies</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% else %}
+<p>No books found in this category yet. <a href="{{ url_for('add_book') }}">Add one</a>.</p>
+{% endif %}
+{% endblock %}
