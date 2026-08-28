@@ -49,7 +49,7 @@ jobs:
           host: ${{ secrets.ANSIBLE_HOST }}
           username: ansibleadmin
           password: ${{ secrets.ANSIBLE_PASSWORD }}
-          key: ${{ secrets.KEY }}
+          # key: ${{ secrets.KEY }}
           port: 22
           script: |
             ansible-playbook project-playbook.yaml -vv
