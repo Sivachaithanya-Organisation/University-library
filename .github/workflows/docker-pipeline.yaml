@@ -50,4 +50,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.KEY }}
           port: 22
-          script: whoami
+          script: |
+            aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 794934876309.dkr.ecr.us-west-2.amazonaws.com
+            docker pull 794934876309.dkr.ecr.us-west-2.amazonaws.com/mohammad-docker:${{ github.sha }}
+            docker rm -f uni-lab
+            docker run -itd -p 8080:8080 --name uni-lab 794934876309.dkr.ecr.us-west-2.amazonaws.com/mohammad-docker:${{ github.sha }}
