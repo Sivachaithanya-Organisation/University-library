@@ -44,12 +44,12 @@ jobs:
           aws-region: us-west-2 
 
       - name: Execute remote SSH commands using password
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.ANSIBLE_HOST }}
           username: ansibleadmin
           password: ${{ secrets.ANSIBLE_PASSWORD }}
-          # key: ${{ secrets.KEY }}
+          key: ${{ secrets.KEY }}
           port: 22
           script: |
             ansible-playbook project-playbook.yaml -vv
