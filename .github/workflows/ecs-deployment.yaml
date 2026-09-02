@@ -42,7 +42,7 @@ jobs:
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-definition: uni-lib-task-definition.json
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: Uni-lib-service
           cluster: SampleECSCluster
           wait-for-service-stability: true
