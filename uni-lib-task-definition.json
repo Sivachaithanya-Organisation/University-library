@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "uni-library",
-            "image": "794934876309.dkr.ecr.us-west-2.amazonaws.com/siva-ansible:latest",
+            "image": "794934876309.dkr.ecr.us-west-2.amazonaws.com/siva-ecs:latest",
             "cpu": 0,
             "portMappings": [
                 {
