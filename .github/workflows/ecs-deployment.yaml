@@ -37,7 +37,7 @@ jobs:
         with:
           task-definition: uni-lib-task-definition.json
           container-name: uni-library
-          image: ${{ steps.build-image.outputs.image }}
+          image: ${{ steps.build-image.outputs.image_uri }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
